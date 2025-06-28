@@ -3,7 +3,6 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { parseISO, isSameDay } from 'date-fns';
 
-
 export default function OKRCalendar({ okrs }) {
   const [value, setValue] = useState(new Date());
 
@@ -12,12 +11,12 @@ export default function OKRCalendar({ okrs }) {
     .filter((okr) => okr.dueDate)
     .map((okr) => parseISO(okr.dueDate));
 
-  // Highlight tiles with due OKRs
+  // Add circle style to tiles with OKRs
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
       const hasOKR = dueDates.some((d) => isSameDay(d, date));
       if (hasOKR) {
-        return 'bg-blue-200 rounded-full font-semibold text-blue-800';
+        return 'okr-highlight';
       }
     }
     return null;
@@ -28,32 +27,37 @@ export default function OKRCalendar({ okrs }) {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <Calendar
         onChange={setValue}
         value={value}
         tileClassName={tileClassName}
-        className="w-full max-w-lg mx-auto border rounded-md shadow"
+        className="w-full border-none shadow-none calendar-custom text-sm"
       />
 
-      <div className="bg-gray-50 p-4 rounded shadow">
-        <h3 className="text-lg font-semibold">
-          OKRs due on {value.toDateString()}
+      <div className="bg-blue-50 p-2 rounded-md text-sm">
+        <h3 className="font-semibold text-gray-800">
+          OKRs on {value.toDateString()}
         </h3>
         {okrsOnDate.length ? (
-          <ul className="list-disc pl-5 mt-2 text-sm">
+          <ul className="list-disc pl-5 mt-1">
             {okrsOnDate.map((okr) => (
-              <li key={okr.id}>
-                <span className="font-medium">{okr.objective}</span>
-              </li>
+              <li key={okr.id}>{okr.objective}</li>
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-gray-500 mt-2">
-            No OKRs due on this date.
-          </p>
+          <p className="text-gray-500 mt-1">No OKRs for this date.</p>
         )}
       </div>
+
+      <style>{`
+        .okr-highlight {
+          background: #bfdbfe !important;
+          color: #1e3a8a !important;
+          border-radius: 9999px;
+          font-weight: 600;
+        }
+      `}</style>
     </div>
   );
 }

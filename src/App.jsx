@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import OKRs from './pages/OKRs';
+import Teams from './pages/Teams';
 import PrivateRoute from './components/PrivateRoute';
 import HowItWorks from './pages/HowItWorks';
 import Pricing from './pages/Pricing';
@@ -37,6 +38,14 @@ function App() {
           element={
             <PrivateRoute>
               <OKRs />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/teams"
+          element={
+            <PrivateRoute>
+              <Teams />
             </PrivateRoute>
           }
         />

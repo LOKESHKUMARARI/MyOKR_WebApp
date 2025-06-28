@@ -1,5 +1,11 @@
 // src/components/Card.jsx
-export default function Card({ title, children, color = 'gray', Icon }) {
+export default function Card({
+  title,
+  children,
+  color = 'gray',
+  Icon,
+  className = '',
+}) {
   const bgMap = {
     blue: 'bg-blue-50 border-blue-300',
     indigo: 'bg-indigo-50 border-indigo-300',
@@ -9,12 +15,16 @@ export default function Card({ title, children, color = 'gray', Icon }) {
   };
 
   return (
-    <div className={`border shadow rounded-lg p-6 h-full flex flex-col ${bgMap[color]} transition transform hover:-translate-y-1`}>
-      <div className="flex items-center mb-4">
-        {Icon && <Icon className="h-6 w-6 text-gray-500 mr-2" />}
-        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-      </div>
-      <div className="flex-1">{children}</div>
+    <div
+      className={`border rounded-lg shadow-sm h-full flex flex-col overflow-hidden ${bgMap[color]} ${className}`}
+    >
+      {title && (
+        <div className="flex items-center px-4 py-2 border-b">
+          {Icon && <Icon className="h-5 w-5 text-gray-500 mr-2" />}
+          <h3 className="text-sm font-semibold text-gray-800">{title}</h3>
+        </div>
+      )}
+      <div className="p-2 flex-1 overflow-y-auto">{children}</div>
     </div>
   );
 }

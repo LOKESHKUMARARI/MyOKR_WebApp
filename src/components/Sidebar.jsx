@@ -10,17 +10,22 @@ const Sidebar = () => {
     navigate('/login');
   };
 
+  const linkClasses = ({ isActive }) =>
+    `block px-3 py-2 rounded transition ${
+      isActive ? 'bg-yellow-500 text-gray-900 font-semibold' : 'hover:text-yellow-400'
+    }`;
+
   return (
     <aside className="w-64 bg-gray-900 text-white h-screen p-5 flex flex-col">
-      <h2 className="text-xl font-bold mb-6">MyOKR</h2>
-      <nav className="flex-1 space-y-3">
-        <NavLink to="/dashboard" className="block hover:text-yellow-400">Dashboard</NavLink>
-        <NavLink to="/okrs" className="block hover:text-yellow-400">OKRs</NavLink>
-        <NavLink to="/teams" className="block hover:text-yellow-400">Teams</NavLink>
+      <h2 className="text-2xl font-bold mb-8">MyOKR</h2>
+      <nav className="flex-1 space-y-2">
+        <NavLink to="/dashboard" className={linkClasses}>Dashboard</NavLink>
+        <NavLink to="/okrs" className={linkClasses}>OKRs</NavLink>
+        <NavLink to="/teams" className={linkClasses}>Teams</NavLink>
       </nav>
       <button
         onClick={handleLogout}
-        className="mt-auto bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
+        className="mt-auto bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white font-semibold"
       >
         Logout
       </button>
