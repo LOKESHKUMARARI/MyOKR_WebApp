@@ -21,13 +21,20 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Normally, you'd send formData to your backend here
     console.log(formData);
     navigate('/login');
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 px-4 relative">
+      {/* Back to Home Button */}
+      <Link
+        to="/"
+        className="absolute top-4 left-4 text-blue-700 font-medium hover:underline"
+      >
+        ← Back to Home
+      </Link>
+
       <div className="bg-white/90 w-full max-w-md p-8 rounded-lg shadow-xl border border-blue-100 backdrop-blur">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Create Your Account</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
